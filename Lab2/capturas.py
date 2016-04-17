@@ -21,6 +21,19 @@ green.save('FotoGreen.png')
 red_histogram = red.histogram(255)
 blue_histogram = blue.histogram(255)
 green_histogram = green.histogram(255)
+plt.figure(2)
+plt.plot(red_histogram)
+plt.title('Histograma Escala red')
+plt.savefig('HistRed.png')
+plt.figure(3)
+plt.plot(green_histogram)
+plt.title('Histograma Escala green')
+plt.savefig('HistGreen.png')
+plt.figure(4)
+plt.plot(blue_histogram)
+plt.title('Histograma Escala blue')
+plt.savefig('HistBlue.png')
+
 
 
 
