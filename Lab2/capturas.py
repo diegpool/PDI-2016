@@ -1,11 +1,25 @@
-from SimpleCV import Camera , Display , Image
+from SimpleCV import*
 
 c = Camera()
 
 img=c.getImage()
-img.save('Foto1.png')
-imgGris =img.toGray()
-imgGris.save('Foto2.png')
-hist = imgGris.histogram(255)
-ploteo=plot(hist)
-ploteo.save('Histograma1.png')
+img.save('FotoNormal.png')
+imgGris =img.grayscale()
+imgGris.save('FotoGrayscale.png')
+
+histogram = imgGris.histogram(255)
+b = range(256)
+plt.plot(b,histogram)
+
+(red,green,blue) = img.splitChannels(False)
+red.save('FotoRed.png')
+blue.save('FotoBlue.png')
+green.save('FotoGreen.png')
+red_histogram = red.histogram(255)
+blue_histogram = blue.histogram(255)
+green_histogram = green.histogram(255)
+
+
+
+
+
