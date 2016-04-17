@@ -1,4 +1,5 @@
 from SimpleCV import*
+import matplotlib.pyplot as plt
 
 c = Camera()
 
@@ -8,8 +9,10 @@ imgGris =img.grayscale()
 imgGris.save('FotoGrayscale.png')
 
 histogram = imgGris.histogram(255)
-b = range(256)
-plt.plot(b,histogram)
+plt.figure(1)
+plt.plot(histogram)
+plt.title('Histograma Escala Grises')
+plt.savefig('HistGray.png')
 
 (red,green,blue) = img.splitChannels(False)
 red.save('FotoRed.png')
