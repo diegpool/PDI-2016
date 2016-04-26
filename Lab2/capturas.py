@@ -56,7 +56,19 @@ while True:
 
 
     if opcion=="3":
-
+        ## Segmentacion manual
+        histogram = imgGris.histogram(255)
+        plt.figure(1)
+        plt.plot(histogram)
+        plt.title('Histograma Escala Grises')
+        print "Guardando histograma escala gris..."
+        plt.savefig('Fotos/HistGray.png')
+        print "Guardando foto binarizada..."
+        imgBin = imgGris.binarize(50,255,0,5)
+        imgBin.save('Fotos/Foto binarizada.png')
+        imgBininv = imgBin.invert()
+        imgBininv.save('Fotos/Foto binarizadaInvertida.png')
+        ##Segmentacion Kmeans
         break
 
 ##(red,green,blue) = img.splitChannels(False)
