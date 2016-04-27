@@ -27,14 +27,25 @@ while True:
         plt.plot(histogram)
         plt.title('Histograma Escala Grises')
         print "Guardando histograma escala gris..."
-        plt.savefig('Fotos/HistGray.png')
+        plt.savefig('Fotos/Blanco/HistGray.png')
         print "Guardando foto binarizada..."
         imgBin = imgGris.binarize(50,255,0,5)
-        imgBin.save('Fotos/Foto binarizada.png')
-        imgBininv = imgBin.invert()
-        imgBininv.save('Fotos/Foto binarizadaInvertida.png')
-        ##Segmentacion Kmeans
+        imgBin.save('Fotos/Blanco/Foto binarizada.png')
+        imgBininv = imgBin.invert() 
+        imgBininv.save('Fotos/Blanco/Foto binarizadaInvertida.png')
 
+        ##Segmentacion Kmeans
+        image = cv2.imread("Fotos/FotoNormal.png")
+        (largo,ancho)=image.shape[:2]
+        image = image.reshape((image.shape[0] * image.shape[1], 3))
+        clt = KMeans(n_clusters = 2)
+        limites= clt.fit_predict(image)
+        quant=clt.cluster_centers_.astype("uint8")[limites]
+        quant=quant.reshape(largo,ancho,3)
+        plt.figure()
+        plt.axis("off")
+        plt.imshow(quant)
+        plt.show()
         break 
 
     if opcion=="2":
@@ -44,16 +55,33 @@ while True:
         plt.plot(histogram)
         plt.title('Histograma Escala Grises')
         print "Guardando histograma escala gris..."
-        plt.savefig('Fotos/HistGray.png')
+        plt.savefig('Fotos/Cuadriculado/HistGray.png')
+        
         print "Guardando foto binarizada..."
-        imgBin = imgGris.binarize(75,255,0,5)
-        imgBin.save('Fotos/Foto binarizada.png')
+        imgBin = imgGris.binarize(60,255,0,5)
+        imgBin.save('Fotos/Cuadriculado/Foto binarizada con cuadriculas.png')
+        imgccuad = imgGris.binarize(90,255,0,5)
+        imgcuadinv=imgccuad.invert()
         imgBininv = imgBin.invert()
-        imgBininv.save('Fotos/Foto binarizadaInvertida.png')
+        imgBininv.save('Fotos/Cuadriculado/Foto binarizadaInvertida.png')
+        imgcuad=imgBininv-imgcuadinv
+        imgcuad.save('Fotos/Cuadriculado/cuadriculas.png')
+        imgcuadn=imgcuad.invert()
+        imgcuadn.save('Fotos/Cuadriculado/lineas.png')
         ##Segmentacion Kmeans
-
-        break
-
+        image = cv2.imread("Fotos/FotoNormal.png")
+        (largo,ancho)=image.shape[:2]
+        image = image.reshape((image.shape[0] * image.shape[1], 3))
+        clt = KMeans(n_clusters = 2)
+        limites= clt.fit_predict(image)
+        quant=clt.cluster_centers_.astype("uint8")[limites]
+        quant=quant.reshape(largo,ancho,3)
+        plt.figure()
+        plt.axis("off")
+        plt.imshow(quant)
+        plt.show()
+        break 
+    
 
     if opcion=="3":
         ## Segmentacion manual
@@ -62,14 +90,29 @@ while True:
         plt.plot(histogram)
         plt.title('Histograma Escala Grises')
         print "Guardando histograma escala gris..."
-        plt.savefig('Fotos/HistGray.png')
+        plt.savefig('Fotos/Color/HistGray.png')
         print "Guardando foto binarizada..."
         imgBin = imgGris.binarize(50,255,0,5)
-        imgBin.save('Fotos/Foto binarizada.png')
+        imgBin.save('Fotos/Color/Foto binarizada.png')
         imgBininv = imgBin.invert()
-        imgBininv.save('Fotos/Foto binarizadaInvertida.png')
+        imgBininv.save('Fotos/Color/Foto binarizadaInvertida.png')
         ##Segmentacion Kmeans
+        image = cv2.imread("Fotos/FotoNormal.png")
+        (largo,ancho)=image.shape[:2]
+        image = image.reshape((image.shape[0] * image.shape[1], 3))
+        clt = KMeans(n_clusters = 2)
+        limites= clt.fit_predict(image)
+        quant=clt.cluster_centers_.astype("uint8")[limites]
+        quant=quant.reshape(largo,ancho,3)
+        plt.figure()
+        plt.axis("off")
+        plt.imshow(quant)
+        plt.show()
         break
+
+
+
+
 
 ##(red,green,blue) = img.splitChannels(False)
 ##print "Guardando foto red..."
