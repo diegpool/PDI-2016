@@ -111,9 +111,6 @@ while True:
         break
 
 
-
-
-
 ##(red,green,blue) = img.splitChannels(False)
 ##print "Guardando foto red..."
 ##red.save('Fotos/FotoRed.png')
