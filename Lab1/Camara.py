@@ -1,4 +1,4 @@
-from SimpleCV import Camera , Display , Image
+from SimpleCV import Camera , Display , Image, time
 
 time.sleep(3)
 c = Camera()
