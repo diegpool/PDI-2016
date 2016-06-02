@@ -1,9 +1,8 @@
 from SimpleCV import*                   # Importamos las librerias necesarias
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 import numpy as np
 import cv2
-
 
 ##c = Camera()                            # Iniciamos la camara
 ##time.sleep(2)                           # Asignamos un tiempo de enfoque antes de sacar la foto
@@ -49,7 +48,35 @@ img3.draw((200,0,0),width=3)
 img.addDrawingLayer(imgGris.dl())
 img.save("FotoBlobGris.png")
 
-##keypoints=detector.detect(img3)
-##wk=cv2.drawKeypoints(img3, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-##cv2.imshow("Keypoints", wk)
-##cv2.waitKey(0)
+dist=green.colorDistance(60,30,30)   # Distancia de color    
+bin=dist.binarize(70).morphClose()
+lines=bin.findLines(threshold=10,minlinelength=15)
+lines.draw(width=3)
+img.addDrawingLayer(bin.dl())
+img.save("FotoDistG.png")
+dist=red.colorDistance()
+bin=dist.binarize(70).morphClose()
+lines=bin.findLines(threshold=10,minlinelength=15)
+lines.draw(width=3)
+img.addDrawingLayer(bin.dl())
+img.save("FotoDistR.png")
+dist=blue.colorDistance()
+bin=dist.binarize(70).morphClose()
+lines=bin.findLines(threshold=10,minlinelength=15)
+lines.draw(width=3)
+img.addDrawingLayer(bin.dl())
+img.save("FotoDistB.png")
+dist=imgGris.colorDistance()
+bin=dist.binarize(70).morphClose()
+lines=bin.findLines(threshold=10,minlinelength=15)
+lines.draw(width=3)
+img.addDrawingLayer(bin.dl())
+img.save("FotoDistGris.png")
+
+img4 = cv2.imread('Foto.png',0)     # laplaciano         
+laplacian = cv2.Laplacian(img4,cv2.CV_64F)
+sobelx = cv2.Sobel(img4,cv2.CV_64F,1,0,ksize=5)
+sobely = cv2.Sobel(img4,cv2.CV_64F,0,1,ksize=5)
+plt.imshow(sobelx,cmap = 'gray')
+plt.savefig("FotoLaplaciana.png")
+
