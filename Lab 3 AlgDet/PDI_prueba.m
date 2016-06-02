@@ -12,7 +12,7 @@ A = zeros(1,1,3);
 B = A;
 numpixA = 0;
 numpixB = 0;
-tolRho = 0.37;
+tolRho = 0.15;
 
 for i=1:d1
     for j = 1:d2
