@@ -71,6 +71,13 @@ for i in range(img.width-2):
             imgBd[i+1][j+1]=[255 , 255 ,255]
         
 
-img.show()
-imgBd.show()
 
+img.show()
+
+imgBd = imgBd.reshape(d[0],d[1],3)
+plt.figure(2)                     
+plt.imshow(imgBd)
+plt.show()
+plt.axis("off")
+
+time.sleep(100)
