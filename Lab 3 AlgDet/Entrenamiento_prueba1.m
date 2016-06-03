@@ -1,7 +1,7 @@
 clear all;close all; clc;
 
-Rho = 0;
-for k = 2:5
+load Rho
+for k = 51:53
     
     n = int2str(k);
     f1 = 'Fotos/';
@@ -9,9 +9,13 @@ for k = 2:5
     Foto = strcat(f1,n,f2);
     img = double(imread(Foto))./255;
     d = size(img);
-
+    fprintf(strcat('Foto número',int2str(k),'\n'));
+    
+    fprintf('Seleccione el anillo interior al lunar \n')
     anLunarL  = roipoly(img);
+    fprintf('Seleccione el anillo exterior al lunar \n')
     anPiel1L  = roipoly(img);
+    fprintf('Seleccione el anillo de la Piel \n')
     anPiel2L  = roipoly(img);
 
     anPielL = anPiel2L&(not(anPiel1L));
@@ -53,12 +57,10 @@ for k = 2:5
 
     A = A/numpixA;
     B = B/numpixB;
-
-    rho = calRho(A,B)
     
-    Rho = Rho + rho;
-
+    Rho(:,k) = calRho(A,B)
+    save Rho
 end
 
 
-Rho = Rho/k;
+
