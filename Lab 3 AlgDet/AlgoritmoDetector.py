@@ -1,32 +1,22 @@
 ## Algoritmo Detector!! 
 
 from SimpleCV import*
-##from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 import time
-from scipy import ndimage
-import pylab as pl
 from Calculo_Rho import rhoCalc
-import math
-from distRhof import distRhot
 
-img = Image('Fotos/1.jpg')
+h = 320
+w = 240
+c = Camera()
+img = c.live()
+time.sleep(3)
+
 
 d = img.size()
-img.resize(img.width +1, img.height+1)
-A = img.getPixel(12,88)
-B = img.getPixel(1,120)
-rho = rhoCalc(A,B)
+matImg = img.getNumpy().astype(dtype = 'float64')
 
-matImg = img.getNumpy()
-print matImg[1][2]
-
-print d 
-print img.height # 480
-print img.width  # 640
-
-imgBd = np.zeros((d[0]+2 , d[1]+2))
+imgBd = np.zeros((d[0] , d[1], 3))
 tolBd = 1
 
 for i in range(img.width-2):
