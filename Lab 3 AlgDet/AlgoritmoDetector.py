@@ -40,7 +40,7 @@ for i in range(img.width-2):
 			matBd[i+1][j+1] = colorBd
 
 
-        At = matImg[i][j]
+        At = matImg[i+1][j]
         Bt = matImg[i+1][j+2]
         rhot1 = rhoCalc(At,Bt)
         rhot2=rhoCalc(Bt,At)
