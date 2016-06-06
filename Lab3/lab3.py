@@ -1,3 +1,4 @@
+
 from SimpleCV import*                   # Importamos las librerias necesarias
 from sklearn.cluster import KMeans
 from matplotlib import pyplot as plt
@@ -17,7 +18,7 @@ blue.save("fotoblue.png")
 green.save("fotogreen.png")
 imgGris=img.grayscale()
 imgGris.save("fotogris.png")
-
+mascara=mascara.resize(320,240)
 img2=green.edges(30,80)                 # algoritmo canny
 img22=img2*mascara+img
 img22.save("FotoEdgeG.png")
@@ -48,7 +49,7 @@ img3.draw((200,0,0),width=3)
 img.addDrawingLayer(imgGris.dl())
 img.save("FotoBlobGris.png")
 
-dist=green.colorDistance(60,30,30)   # Distancia de color    
+dist=green.colorDistance()   # Distancia de color    
 bin=dist.binarize(70).morphClose()
 lines=bin.findLines(threshold=10,minlinelength=15)
 lines.draw(width=3)
@@ -79,4 +80,3 @@ sobelx = cv2.Sobel(img4,cv2.CV_64F,1,0,ksize=5)
 sobely = cv2.Sobel(img4,cv2.CV_64F,0,1,ksize=5)
 plt.imshow(sobelx,cmap = 'gray')
 plt.savefig("FotoLaplaciana.png")
-
