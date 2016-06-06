@@ -1,16 +1,18 @@
 clear all ; close all; clc;
 
-img = double(imread('Fotos/52.jpg'))./255;
-load Rho2.mat
+img = double(imread('Fotos/Foto.png'))./255;
+%load Rho2.mat
 
 d = size(img);
 
-rho = (1/length(Rho))*sum(Rho'); %#ok<UDIM>
+%rho = (1/length(Rho))*sum(Rho'); %#ok<UDIM>
 
 imges=[img(:,1,:) img img(:,end,:)];
 imges=[imges(1,:,:); imges ;imges(end,:,:)];
 imgBorde = zeros(d);
-
+A=[86,53,36];
+B=[133,119,63];
+rho = calRho(A,B);
 tolBorde = 0.7;
 
 for i=1:d(1);
