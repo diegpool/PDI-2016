@@ -6,6 +6,7 @@ import cv2
 import time
 import ast
 from Calculo_Rho import rhoCalc
+import os
 
 h = 240
 w = 320
@@ -24,7 +25,7 @@ while Captura == 's':
 
 
 Sample.quit()
-
+img.save('Fotos/CapturaInicial.png')
 
 matImg = img.getNumpy().astype(dtype='float64')
 d = matImg.shape
@@ -37,6 +38,7 @@ rho = rhoCalc(A,B);
 
 print 'Para seleccionar el valor de la tolerancia considere que a mayor exposicion a la luz mas tolerancia, e inverso entre menos luz menos tolerancia'
 print 'Valor medio recomendado tol = 1'
+porcentaje = 0
 Probar = 's'
 while Probar == 's':
 	matBd = np.zeros_like(matImg)
@@ -63,28 +65,28 @@ while Probar == 's':
 			rhot1 = rhoCalc(At,Bt)
 			rhot2=rhoCalc(Bt,At)
 			if np.linalg.norm(rho - rhot1)<tolBd:
-			    matBd[i+1][j+1]=colorBd
+			    	matBd[i+1][j+1]=colorBd
 			elif np.linalg.norm(rho - rhot2)<tolBd:
-			    matBd[i+1][j+1]=colorBd
+			    	matBd[i+1][j+1]=colorBd
 			
-			
+		
 			At = matImg[i][j]
 			Bt = matImg[i+2][j+2]
 			rhot1 = rhoCalc(At,Bt)
 			rhot2 = rhoCalc(Bt,At)
 			if np.linalg.norm(rho - rhot1)<tolBd :
-			    matBd[i+1][j+1]=colorBd
+			    	matBd[i+1][j+1]=colorBd
 			elif np.linalg.norm(rho - rhot2)<tolBd :
-			    matBd[i+1][j+1]=colorBd
+			    	matBd[i+1][j+1]=colorBd
 			
 			At = matImg[i][j+2]
 			Bt = matImg[i+2][j]
 			rhot1 = rhoCalc(At,Bt)
 			rhot2 = rhoCalc(Bt,At)
 			if np.linalg.norm(rho - rhot1)<tolBd :
-			    matBd[i+1][j+1]=colorBd
+			    	matBd[i+1][j+1]=colorBd
 			elif np.linalg.norm(rho - rhot2)<tolBd :
-			    matBd[i+1][j+1]=colorBd
+				matBd[i+1][j+1]=colorBd
 	
 	print 'Escaneo completado!'
 	imgBd = Image(matBd)
@@ -94,4 +96,5 @@ while Probar == 's':
 	Show.quit()
 
 
+ImgFinal.save('Fotos/FotoFinal.png')
 print 'Adios !'
